@@ -1,1 +1,72 @@
+# Test Cases for Authorization and Registration Components
+
+
+## Authorization Component
+
+### Positive Test Cases
+
+| ID      | Test Case Name                              | Test Steps                                                  | Expected Result                             
+|---------|-----------------------------------------|-----------------------------------------------------------------|-----------------------------------------------
+| AUTH-01 | Successful login with valid credentials | 1. Open login page
+                                                      2. Enter valid email and password
+                                                      3. Click "Login"                                                | User is authenticated and redirected to homepage |
+
+| AUTH-02 | "Remember Me" option works correctly    | 1. Enter valid credentials
+                                                      2. Check "Remember Me"
+                                                      3. Login and close browser
+                                                      4. Reopen browser and open site                                 | User stays logged in without re-entering credentials |
+
+### Negative Test Cases
+
+| ID      | Test Case Name                          | Test Steps                                                     | Expected Result                                  
+|---------|-----------------------------------------|----------------------------------------------------------------|-------------------------------------------
+| AUTH-03 | Failed login with incorrect password    | 1. Open login page
+                                                      2. Enter valid email and wrong password
+                                                      3. Click "Login"                                               | Error message "Invalid username or password" is shown |
+
+| AUTH-04 | Login with unregistered email          |  1. Enter unregistered email
+                                                      2. Enter any password
+                                                      3. Click "Login"                                               | Error message "User not found" is displayed      |
+
+| AUTH-05 | Login attempt with empty fields        | 1. Leave email and password fields empty
+                                                     2. Click "Login"                                                | Validation error messages for required fields    |
+
+| AUTH-06 | Prevent SQL Injection attacks          | 1. Enter typical SQL injection string (e.g. `' OR '1'='1`) 
+                                                        in email or password field                                   | Login denied, error message displayed, no crash  |
+
+
+
+## Registration Component
+
+### Positive Test Cases
+
+| ID     | Test Case Name                           | Test Steps                                                      | Expected Result                                  
+|--------|------------------------------------------|-----------------------------------------------------------------|-------------------------------------------------|
+| REG-01 | Successful registration with valid data  | 1. Open registration page
+                                                      2. Enter valid name, email, and password
+                                                      3. Confirm password
+                                                      4. Click "Register"                                             | Account created successfully, redirected to login or                                                                                                                              auto-logged in |
+
+| REG-02 | Password meets security requirements     | 1. Enter password with minimum 8 characters, 
+                                                         including uppercase, lowercase, and digits
+                                                      2. Register                                                     | Registration succeeds                              |
+
+### Negative Test Cases
+
+| ID     | Test Case Name                           | Test Steps                                                      | Expected Result              
+|--------|--------------------------------------------|---------------------------------------------------------------|-----------------------------------------------------
+| REG-03 | Registration with existing email         | 1. Enter an email already registered
+                                                      2. Fill other fields
+                                                      3. Click "Register"                                             | Error message "Email already in use"             |
+
+| REG-04 | Invalid email format                     | 1. Enter invalid email (e.g. `useratexample`)                   | Validation error "Invalid email format"          |
+
+| REG-05 | Password and confirm password mismatch   | 1. Enter different passwords in "Password" and
+                                                         "Confirm Password" fields                                    | Error message "Passwords do not match"           |
+
+| REG-06 | Password too short                       | 1. Enter password shorter than 8 characters                     | Validation error about minimum password length    |
+
+| REG-07 | Required fields left empty               | 1. Leave name, email or password empty
+                                                      2. Click "Register"                                             | Validation errors for required fields             |
+
 
